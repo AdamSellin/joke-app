@@ -1,14 +1,22 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.2
+
 jobs:
   build:
     docker:
-      - image: circleci/node:16.13.0
+      - image: cimg/base:stable
     steps:
       - checkout
-      - run: npm install
-      - run: npm run build
-      - run: npm test
+      - node/install:
+          node-version: 16.13.0
+          
+      - run:
+          name: Install dependencies
+          command: |
+            npm ci
+            npm run build
 
   workflow:
     jobs:
