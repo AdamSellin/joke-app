@@ -20,7 +20,7 @@ jobs:
 
   workflow:
     jobs:
-      - build
+      - build:
         filters:
           branches:
             only:
