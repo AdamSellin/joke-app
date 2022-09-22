@@ -6,11 +6,12 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/base:stable
+      - image: 'cimg/base:stable'
     steps:
       - checkout
       - node/install:
-          node-version: 16.13.0
+          install-yarn: true
+          node-version: '16.13'
           
       - run:
           name: Install dependencies
@@ -21,7 +22,7 @@ jobs:
   workflow:
     jobs:
       - build:
-        filters:
-          branches:
-            only:
-              - circleci
+          filters:
+            branches:
+              only:
+                - circleci
