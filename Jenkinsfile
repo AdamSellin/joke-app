@@ -1,19 +1,21 @@
 pipeline {
-   agent any
-   stages {
-       stage('Build Code') {
-           steps {
-               sh """
-               echo "Building Artifact"
-               """
-           }
-       }
-      stage('Deploy Code') {
-          steps {
-               sh """
-               echo "Deploying Code"
-               """
-          }
+  agent any
+
+  environment {
+    VERSION = "latest"
+  }
+
+  stages {
+    stage('build') {
+      steps {
+        sh "echo 'Building... version : ${env.VERSION}'"
+        sh "echo 'Building... version : ${VERSION}'"
+        sh "npm install -g pnpm"
+        sh "pnpm install"
+        sh "pnpm build"
+        sh "pnpm test"
       }
-   }
+
+    }
+  }
 }
